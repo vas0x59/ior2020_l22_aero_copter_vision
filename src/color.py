@@ -77,7 +77,9 @@ def get_color_objs(image, hsv, color_params):
     debug_out = cv2.bitwise_and(image, image, mask=mask)
 
     # Вариант 1
-    area = np.sum(mask) / 255
+    # area = np.sum(mask) / 255
+    # Вариант 2
+    area = sum(map(cv2.contourArea, cnts))
 
     return debug_out, area, obj_count, cnts
 
