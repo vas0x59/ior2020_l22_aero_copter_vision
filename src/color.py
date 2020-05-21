@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
-#  Иморт всего что надо 
+#  Иморт всего что надо
 import math
 import rospy
 import time
 from sensor_msgs.msg import Image
+from std_msgs.msg import Int32
 from cv_bridge import CvBridge, CvBridgeError
 import cv2
 import numpy as np
@@ -22,14 +23,23 @@ image_pub_red = rospy.Publisher("/color/debug_img_red", Image)
 image_pub_yellow = rospy.Publisher("/color/debug_img_yellow", Image)
 image_pub_blue = rospy.Publisher("/color/debug_img_blue", Image)
 
+blue_area_pub = rospy.Publisher("/color/blue_area", Int32)
+blue_count_pub = rospy.Publisher("/color/blue_count", Int32)
+
 """
 Параметры цветов
 """
-colors_p = {
+colors_p_hsv = {
     "yellow": (np.array([10,  50,  80]), np.array([35,  255, 255])),
     "red": (np.array([170, 40,  40]), np.array([255, 255, 255])),
     "blue": (np.array([75,  80,  80]), np.array([130, 255, 255]))
 }
+colors_p_rgb = {
+    "yellow": np.array([0,  200,  200]),
+    "red": np.array([0, 0, 255]),
+    "blue": np.array([255, 0, 0])
+}
+
 
 """
 Параметры распознования
@@ -47,6 +57,8 @@ def most_frequent(arr):
     except:
         return "none"
 '''
+
+
 def get_color_objs(image, hsv, color_params):
     """
 
@@ -81,28 +93,42 @@ def draw_cnts_colors(image, cnts, color_name, color):
     return image
 
 
-def waitDataColor(image):
+def reg_color(image):
+    """
+    Функция распознования цветов
+    Output
+    DEBUG Image, RED image, YELLOW image, BLUE image, BLUE area, BLUE obj count
+    """
     debug_main = image.copy()
     ratio = 1
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     results = {}
     for c in ["red", "yellow", "blue"]:
-        results[c] = tuple(get_color_objs(image, hsv, colors_p[c]))
+        results[c] = tuple(get_color_objs(image, hsv, colors_p_hsv[c]))
 
     # get_color_objs
 
     # red, yellow, blue, n, s = waitDataColor(image)
-    print('Number of BLUE figures:', n, 'Area of all BLUE figures:', s)
+    # 
     # cv2.imshow('red', red)
     # cv2.imshow('yellow', yellow)
     # cv2.imshow('blue', blue)
     # draw_cnts_colors()
+    for i in results.keys():
+        res = results[i]
+        draw_cnts_colors(debug_main, results[3], i, colors_p_rgb[i])
+
+    cv2.putText(debug_main, str("Count BLUE: " + str(results["blue"][2]) + " Area BLUE: " + str(results["blue"][2])), (10, 10),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.5, colors_p_rgb["blue"], 2, cv2.LINE_AA)
+
     if IMSHOW_ENB:
         for i in results.keys():
             cv2.imshow(i, results[i][0])
 
         cv2.imshow('debug_main', debug_main)
-    return results["red"][0], results["yellow"][0], results["blue"][0], results["blue"][2], results["blue"][1]
+    
+
+    return debug_main, results["red"][0], results["yellow"][0], results["blue"][0], results["blue"][1], results["blue"][2]
 
 
 def img_clb(data):
@@ -110,7 +136,22 @@ def img_clb(data):
     Callback фунция для работы с ROS
     """
     cv_image = bridge.imgmsg_to_cv2(data, "bgr8")
+    image, red, yellow, blue, s, n = reg_color(cv_image)
+    print('Number of BLUE figures:', n, 'Area of all BLUE figures:', s)
+    
+    """
+    Отправка изображений в топики
+    """
+    image_pub.publish(bridge.cv2_to_imgmsg(image, "bgr8"))
+    image_pub_red.publish(bridge.cv2_to_imgmsg(red, "bgr8"))
+    image_pub_yellow.publish(bridge.cv2_to_imgmsg(yellow, "bgr8"))
+    image_pub_blue.publish(bridge.cv2_to_imgmsg(blue, "bgr8"))
 
+    """
+    Отправка результатов распознования синих объектов
+    """
+    blue_count_pub.publish(n)
+    blue_area_pub.publish(s)
 
 # cap = cv2.VideoCapture(0)
 
