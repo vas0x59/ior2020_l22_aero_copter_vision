@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import math
+import rospy
 import time
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge, CvBridgeError
 import cv2
 import numpy as np
 
