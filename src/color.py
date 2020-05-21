@@ -4,6 +4,7 @@ import time
 import cv2
 import numpy as np
 
+
 def most_frequent(arr):
     try:
         return max(set(arr), key = arr.count)
