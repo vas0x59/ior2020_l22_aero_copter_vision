@@ -1,6 +1,9 @@
+#! /usr/bin/env python3
+
 # -*- coding: utf-8 -*-
 
-#  Иморт всего что надо
+# tested on python3
+# Иморт всего что надо
 import math
 import rospy
 import time
@@ -61,7 +64,7 @@ def most_frequent(arr):
 
 def get_color_objs(image, hsv, color_params):
     """
-
+    Обработка изображения для определенного цвета
     """
     debug_out = image.copy()
 
