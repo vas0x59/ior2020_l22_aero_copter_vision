@@ -9,6 +9,7 @@ import numpy as np
 
 from pyzbar import pyzbar
 
+rospy.init_node('team_name_qr_node', anonymous=True)
 
 image_pub = rospy.Publisher("/qr/debug_img",Image)
 
@@ -44,7 +45,7 @@ bridge = CvBridge()
 image_sub = rospy.Subscriber(
     "/main_camera/image_raw", Image, img_clb)
 
-rospy.init_node('team_name_qr_node', anonymous=True)
+
 
 rospy.spin()
 

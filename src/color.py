@@ -7,6 +7,8 @@ from cv_bridge import CvBridge, CvBridgeError
 import cv2
 import numpy as np
 
+rospy.init_node('team_name_color_node', anonymous=True)
+
 image_pub = rospy.Publisher("/color/debug_img",Image)
 image_pub_red = rospy.Publisher("/color/debug_img_red",Image)
 image_pub_green = rospy.Publisher("/color/debug_img_green",Image)
@@ -63,9 +65,15 @@ def waitDataColor(image):
     cv2.imshow('image', image)
     return red, yellow, blue, count, area_all
 
-# cap = cv2.VideoCapture(0)
+def img_clb(data):
+    cv_image = bridge.imgmsg_to_cv2(data, "bgr8")
+    
 
-rospy.init_node('team_name_color_node', anonymous=True)
+# cap = cv2.VideoCapture(0)
+bridge = CvBridge()
+image_sub = rospy.Subscriber(
+    "/main_camera/image_raw", Image, img_clb)
+
 
 rospy.spin()
 
