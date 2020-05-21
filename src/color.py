@@ -7,6 +7,11 @@ from cv_bridge import CvBridge, CvBridgeError
 import cv2
 import numpy as np
 
+image_pub = rospy.Publisher("/color/debug_img",Image)
+image_pub_red = rospy.Publisher("/color/debug_img_red",Image)
+image_pub_green = rospy.Publisher("/color/debug_img_green",Image)
+image_pub_yellow = rospy.Publisher("/color/debug_img_yellow",Image)
+image_pub_blue = rospy.Publisher("/color/debug_img_blue",Image)
 
 def most_frequent(arr):
     try:
@@ -49,11 +54,6 @@ def waitDataColor(image):
         area_all += area
         c = c.astype("int")
         cv2.drawContours(blue, [c], -1, (0, 255, 0), 2)
-    return red, yellow, blue, count, area_all
-
-cap = cv2.VideoCapture(0)
-
-while cv2.waitKey(1) != 27:
     ret, image = cap.read()
     red, yellow, blue, n, s = waitDataColor(image)
     print('Number of figures:', n, 'Area of all figures:', s)
@@ -61,3 +61,19 @@ while cv2.waitKey(1) != 27:
     cv2.imshow('yellow', yellow)
     cv2.imshow('blue', blue)
     cv2.imshow('image', image)
+    return red, yellow, blue, count, area_all
+
+# cap = cv2.VideoCapture(0)
+
+rospy.init_node('team_name_color_node', anonymous=True)
+
+rospy.spin()
+
+# while cv2.waitKey(1) != 27:
+#     ret, image = cap.read()
+#     red, yellow, blue, n, s = waitDataColor(image)
+#     print('Number of figures:', n, 'Area of all figures:', s)
+#     cv2.imshow('red', red)
+#     cv2.imshow('yellow', yellow)
+#     cv2.imshow('blue', blue)
+#     cv2.imshow('image', image)

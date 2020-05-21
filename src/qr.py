@@ -44,17 +44,7 @@ bridge = CvBridge()
 image_sub = rospy.Subscriber(
     "/main_camera/image_raw", Image, img_clb)
 
-# ic = image_converter()
-
-
-
-# res_pub = rospy.Publisher("/lane/res",LaneRes)
-
-
-        
-
-# cap = cv2.VideoCapture(0)
-rospy.init_node('image_converter', anonymous=True)
+rospy.init_node('team_name_qr_node', anonymous=True)
 
 rospy.spin()
 
