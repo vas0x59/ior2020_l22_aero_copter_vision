@@ -7,6 +7,6 @@
         <param name="image_height" value="240" />
         <param name="rate" value="18" />
     </node> -->
-        <node pkg="ior2020_copter_vision" type="<TEAMNAME>_cam.py" name="<TEAMNAME>_cam" output="screen" clear_params="true"/>
+        <node pkg="ior2020_copter_vision" type="team_name_cam.py" name="team_name_cam" output="screen" clear_params="true"/>
     
 </launch>

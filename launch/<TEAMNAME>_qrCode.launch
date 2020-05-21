@@ -1,5 +1,0 @@
-<launch>
-
-    <node pkg="ior2020_copter_vision" type="<TEAMNAME>_qrCode.py" name="<TEAMNAME>_qrCode" output="screen" clear_params="true"/>
-    
-</launch>

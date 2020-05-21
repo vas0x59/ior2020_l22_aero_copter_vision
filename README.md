@@ -1,4 +1,4 @@
-## Код команды <TEAMNAME>
+## Код команды team_name
 
 Протестированно с версиями ПО python=3, ros=melodic, os=Ubuntu 18.04, Arch linux, Debian Buster
 ## Установка зависимостей
@@ -11,24 +11,24 @@ pip3 install pyzbar
 ### В виде ROS пакета
  - Создать catkin workspace 
  - Поместить файлы пакета в папку src workspace`а
- - Cкомпелировать пакет ior2020_<TEAMNAME>_copter_vision  (выполнить ``` catkin_make``` в папке workspace`a )
+ - Cкомпелировать пакет ior2020_team_name_copter_vision  (выполнить ``` catkin_make``` в папке workspace`a )
  - выполнить ``` source devel/setup.bash``` в папке workspace`a 
 #### Для Color Recognition
 ```bash
-roslaunch ior2020_<TEAMNAME>_copter_vision <TEAMNAME>_colorDetecting_withCam.launch
+roslaunch ior2020_team_name_copter_vision team_name_colorDetecting_withCam.launch
 ```
 #### Для Qr Recognition
 ```bash
-roslaunch ior2020_<TEAMNAME>_copter_vision <TEAMNAME>_qrCode_withCam.launch
+roslaunch ior2020_team_name_copter_vision team_name_qrCode_withCam.launch
 ```
 ### В виде отдельных python файлов
 перед запуском файлов проекта в ручную необходимо запустить ноду работы с камерой 
-```python3 src/<TEAMNAME>_cam.py```
+```python3 src/team_name_cam.py```
 #### Для Color Recognition
 ```bash
-python3 src/<TEAMNAME>_colorDetecting.py
+python3 src/team_name_colorDetecting.py
 ```
 #### Для Qr Recognition
 ```bash
-python3 src/<TEAMNAME>_qrCode.py
+python3 src/team_name_qrCode.py
 ```
