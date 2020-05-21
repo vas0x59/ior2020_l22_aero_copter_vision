@@ -4,6 +4,7 @@
 import math
 import rospy
 import time
+from std_msgs.msg import String
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 import cv2
@@ -14,6 +15,7 @@ from pyzbar import pyzbar
 rospy.init_node('team_name_qr_node', anonymous=True)
 
 image_pub = rospy.Publisher("/qr/debug_img",Image)
+data_pub = rospy.Publisher("/qr/str",String)
 
 def most_frequent(arr):
     try:
@@ -29,8 +31,8 @@ def waitDataQR(image):
     for barcode in barcodes:
         (x, y, w, h) = barcode.rect
         barcodeData.append(barcode.data.decode("utf-8"))
-        xc = x + w/2
-        yc = y + h/2
+        xc = int(x + w/2)
+        yc = int(y + h/2)
         cv2.rectangle(out_img,(x, y), (x+w, y+h),(0,255,0),3)
         # font = 
         cv2.putText(out_img,barcodeData[-1],(xc,yc), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(0,255,0),2,cv2.LINE_AA)
@@ -40,8 +42,10 @@ def waitDataQR(image):
 def img_clb(data):
     cv_image = bridge.imgmsg_to_cv2(data, "bgr8")
     # out_img = cv_image.copy()
-    out_img = waitDataQR(cv_image)
+    out_img, dd = waitDataQR(cv_image)
+    print(dd)
     image_pub.publish(bridge.cv2_to_imgmsg(out_img, "bgr8"))
+    data_pub.publish(" ".join(dd))
 
 bridge = CvBridge()
 image_sub = rospy.Subscriber(
