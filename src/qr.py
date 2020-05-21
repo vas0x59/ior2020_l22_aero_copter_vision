@@ -30,8 +30,8 @@ def waitDataQR(image):
         xc = x + w/2
         yc = y + h/2
         cv2.rectangle(out_img,(x, y), (x+w, y+h),(0,255,0),3)
-        font = cv2.FONT_HERSHEY_SIMPLEX
-        cv2.putText(out_img,barcodeData[-1],(xc,yc), font, 0.5,(0,255,0),2,cv2.LINE_AA)
+        # font = 
+        cv2.putText(out_img,barcodeData[-1],(xc,yc), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(0,255,0),2,cv2.LINE_AA)
     return out_img, barcodeData
 
 
