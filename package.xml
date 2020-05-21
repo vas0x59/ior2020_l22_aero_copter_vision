@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>team_name_copter_vision</name>
+  <name>ior2020_copter_vision</name>
   <version>0.0.1</version>
   <description>The Copter vision Ros package</description>
 
@@ -8,7 +8,7 @@
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
   <maintainer email="vasily.yuryev.a1@gmail.com">Vasily Yuryev</maintainer>
-  <maintainer email="????????????????@gmail.com">Dmitrii Okoneshnikov</maintainer>
+  <maintainer email="dimasik_not_real@gmail.com">Dmitrii Okoneshnikov</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->

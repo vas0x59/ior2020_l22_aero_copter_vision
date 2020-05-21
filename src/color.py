@@ -38,9 +38,9 @@ colors_p_hsv = {
     "blue": (np.array([75,  80,  80]), np.array([130, 255, 255]))
 }
 colors_p_rgb = {
-    "yellow": np.array([0,  200,  200]),
-    "red": np.array([0, 0, 255]),
-    "blue": np.array([255, 0, 0])
+    "yellow": [0,  200,  200],
+    "red": [0, 0, 255],
+    "blue": [255, 0, 0]
 }
 
 
@@ -87,7 +87,7 @@ def draw_cnts_colors(image, cnts, color_name, color):
     Отрисовка контуров на итоговом изображении
     """
     for cnt in cnts:
-        M = cv2.moments(c)
+        M = cv2.moments(cnt)
         cX = int((M["m10"] / (M["m00"] + 1e-7)))
         cY = int((M["m01"] / (M["m00"] + 1e-7)))
         cv2.drawContours(image, [cnt], -1, color, 2)
@@ -119,9 +119,9 @@ def reg_color(image):
     # draw_cnts_colors()
     for i in results.keys():
         res = results[i]
-        draw_cnts_colors(debug_main, results[3], i, colors_p_rgb[i])
+        draw_cnts_colors(debug_main, results[i][3], i, colors_p_rgb[i])
 
-    cv2.putText(debug_main, str("Count BLUE: " + str(results["blue"][2]) + " Area BLUE: " + str(results["blue"][2])), (10, 10),
+    cv2.putText(debug_main, str("Count BLUE: " + str(results["blue"][2]) + " Area BLUE: " + str(results["blue"][1])), (10, 10),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, colors_p_rgb["blue"], 2, cv2.LINE_AA)
 
     if IMSHOW_ENB:
@@ -129,6 +129,7 @@ def reg_color(image):
             cv2.imshow(i, results[i][0])
 
         cv2.imshow('debug_main', debug_main)
+        cv2.waitKey(1)
     
 
     return debug_main, results["red"][0], results["yellow"][0], results["blue"][0], results["blue"][1], results["blue"][2]
@@ -153,8 +154,8 @@ def img_clb(data):
     """
     Отправка результатов распознования синих объектов
     """
-    blue_count_pub.publish(n)
-    blue_area_pub.publish(s)
+    blue_count_pub.publish(int(n))
+    blue_area_pub.publish(int(s))
 
 # cap = cv2.VideoCapture(0)
 
