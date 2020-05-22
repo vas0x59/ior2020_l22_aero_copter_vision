@@ -1,0 +1,6 @@
+<launch>
+    <include file="$(find ior2020_copter_vision)/launch/team_name_cam.launch" />
+    <include file="$(find ior2020_copter_vision)/launch/team_name_colorDetecting.launch" />
+    <!-- <include file="$(find ior2020_copter_vision)/launch/camera1.launch" /> -->
+    
+</launch>
