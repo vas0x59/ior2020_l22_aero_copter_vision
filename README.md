@@ -24,7 +24,8 @@ roslaunch ior2020_team_name_copter_vision team_name_qrCode_withCam.launch
 ### В виде отдельных python файлов
 перед запуском файлов проекта в ручную необходимо запустить ноду работы с камерой  
 ```bash
-python3 src/team_name_cam.py```
+python3 src/team_name_cam.py
+```bash
 #### Для Color Recognition
 ```bash
 python3 src/team_name_colorDetecting.py
