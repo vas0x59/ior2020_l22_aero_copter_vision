@@ -1,4 +1,4 @@
-## Код команды **L22_ÆRO**
+# Код команды L22_**ÆRO**
 
 Протестированно с версиями ПО python=3, ros=melodic, os=Ubuntu 18.04, Arch linux, Debian Buster
 ## Установка зависимостей
@@ -34,3 +34,5 @@ python3 src/L22_AERO_colorDetecting.py
 ```bash
 python3 src/L22_AERO_qrCode.py
 ```
+-----------
+L22_**ÆRO**
