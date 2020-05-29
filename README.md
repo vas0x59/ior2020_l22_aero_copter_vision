@@ -1,4 +1,4 @@
-## Код команды team_name
+## Код команды L22_ÆRO
 
 Протестированно с версиями ПО python=3, ros=melodic, os=Ubuntu 18.04, Arch linux, Debian Buster
 ## Установка зависимостей
