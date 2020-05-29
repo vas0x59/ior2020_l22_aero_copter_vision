@@ -11,26 +11,26 @@ pip3 install pyzbar
 ### В виде ROS пакета
  - Создать catkin workspace 
  - Поместить файлы пакета в папку src workspace`а
- - Cкомпелировать пакет ior2020_team_name_copter_vision  (выполнить ``` catkin_make``` в папке workspace`a )
+ - Cкомпелировать пакет ior2020_L22_AERO_copter_vision  (выполнить ``` catkin_make``` в папке workspace`a )
  - выполнить ``` source devel/setup.bash``` в папке workspace`a 
 #### Для Color Recognition
 ```bash
-roslaunch ior2020_team_name_copter_vision team_name_colorDetecting_withCam.launch
+roslaunch ior2020_L22_AERO_copter_vision L22_AERO_colorDetecting_withCam.launch
 ```
 #### Для Qr Recognition
 ```bash
-roslaunch ior2020_team_name_copter_vision team_name_qrCode_withCam.launch
+roslaunch ior2020_L22_AERO_copter_vision L22_AERO_qrCode_withCam.launch
 ```
 ### В виде отдельных python файлов
 перед запуском файлов проекта в ручную необходимо запустить ноду работы с камерой  
 ```bash
-python3 src/team_name_cam.py
+python3 src/L22_AERO_cam.py
 ```
 #### Для Color Recognition
 ```bash
-python3 src/team_name_colorDetecting.py
+python3 src/L22_AERO_colorDetecting.py
 ```
 #### Для Qr Recognition
 ```bash
-python3 src/team_name_qrCode.py
+python3 src/L22_AERO_qrCode.py
 ```
