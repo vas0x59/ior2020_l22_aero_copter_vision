@@ -1,6 +1,6 @@
 # Код команды L22_**ÆRO**
 
-Протестированно с версиями ПО python=3, ros=melodic, os=Ubuntu 18.04, Arch linux, Debian Buster
+Протестированно с версиями ПО python=2, 3, ros=melodic, os=Ubuntu 18.04, Arch linux, Debian Buster, Windows 10
 ## Установка зависимостей
 ```bash
 pip3 install numpy
