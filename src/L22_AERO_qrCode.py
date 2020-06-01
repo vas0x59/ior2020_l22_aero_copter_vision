@@ -12,10 +12,13 @@ import numpy as np
 
 from pyzbar import pyzbar
 
+IMSHOW_ENB = True  # на дроне False
+
 rospy.init_node('team_name_qr_node', anonymous=True)
 
 image_pub = rospy.Publisher("/qr/debug_img",Image)
 data_pub = rospy.Publisher("/qr/str",String)
+
 
 def most_frequent(arr):
     try:
@@ -43,7 +46,11 @@ def img_clb(data):
     cv_image = bridge.imgmsg_to_cv2(data, "bgr8")
     # out_img = cv_image.copy()
     out_img, dd = waitDataQR(cv_image)
-    print(dd)
+    print(sorted(dd))
+    if IMSHOW_ENB:
+        cv2.imshow('debug_main', out_img)
+        cv2.waitKey(1)
+
     image_pub.publish(bridge.cv2_to_imgmsg(out_img, "bgr8"))
     data_pub.publish(" ".join(dd))
 
