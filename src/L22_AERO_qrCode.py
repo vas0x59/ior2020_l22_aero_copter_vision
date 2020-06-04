@@ -14,8 +14,14 @@ from pyzbar import pyzbar
 
 IMSHOW_ENB = True  # на дроне False
 
+"""
+Инициализация ноды ROS
+"""
 rospy.init_node('team_name_qr_node', anonymous=True)
 
+"""
+Publisher`ы для работы с ROS
+"""
 image_pub = rospy.Publisher("/qr/debug_img",Image)
 data_pub = rospy.Publisher("/qr/str",String)
 
@@ -30,7 +36,15 @@ def waitDataQR(image):
     out_img = image.copy()
     barcodeData = []
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    """
+    Детектирование QR кодов
+    """
     barcodes = pyzbar.decode(gray)
+
+    """
+    Визуализация
+    """
     for barcode in barcodes:
         (x, y, w, h) = barcode.rect
         barcodeData.append(barcode.data.decode("utf-8"))
@@ -43,6 +57,9 @@ def waitDataQR(image):
 
 
 def img_clb(data):
+    """
+    Callback фунция для работы с ROS
+    """
     cv_image = bridge.imgmsg_to_cv2(data, "bgr8")
     # out_img = cv_image.copy()
     out_img, dd = waitDataQR(cv_image)
@@ -50,11 +67,25 @@ def img_clb(data):
     if IMSHOW_ENB:
         cv2.imshow('debug_main', out_img)
         cv2.waitKey(1)
-
+    """
+    Отправка изображений в топики
+    """
     image_pub.publish(bridge.cv2_to_imgmsg(out_img, "bgr8"))
+
+    """
+    Отправка результатов распознования 
+    """
     data_pub.publish(" ".join(dd))
 
+
+"""
+класс для конвертации сообщений и изображений
+"""
 bridge = CvBridge()
+
+"""
+Subscriber для приема данных с камеры
+"""
 image_sub = rospy.Subscriber(
     "/main_camera/image_raw", Image, img_clb)
 
