@@ -9,7 +9,7 @@ from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 import cv2
 import numpy as np
-
+import json
 from pyzbar import pyzbar
 
 IMSHOW_ENB = True  # на дроне False
@@ -75,7 +75,7 @@ def img_clb(data):
     """
     Отправка результатов распознования 
     """
-    data_pub.publish(" ".join(dd))
+    data_pub.publish(json.dumps(dd))
 
 
 """

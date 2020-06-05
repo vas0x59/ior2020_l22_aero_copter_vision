@@ -32,10 +32,10 @@ blue_count_pub = rospy.Publisher("/color/blue_count", Int32)
 Параметры цветов
 """
 colors_p_hsv = {
-    "yellow": (np.array([15,  80,  80]), np.array([35,  255, 255])),
-    "red": (np.array([160, 98,  98]), np.array([255, 255, 255])),
-    "red2": (np.array([0, 98,  98]), np.array([10, 255, 255])),
-    "blue": (np.array([90,  80,  80]), np.array([130, 255, 255]))
+    "yellow": (np.array([8,  60,  60]), np.array([35,  255, 255])),
+    "red": (np.array([160, 80,  80]), np.array([255, 255, 255])),
+    "red2": (np.array([0, 80,  80]), np.array([8, 255, 255])),
+    "blue": (np.array([90,  70,  70]), np.array([160, 255, 255]))
 }
 colors_p_rgb = {
     "yellow": [0,  200,  200],
