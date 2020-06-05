@@ -7,6 +7,19 @@ pip3 install numpy
 pip3 install opencv-python
 pip3 install pyzbar
 ```
+## Файлы 
+### Python 3
+```ior_ws/src/ior2020_l22_aero_copter_vision/src/L22_AERO_colorDetecting.py``` - реализация распознования цветов \
+```ior_ws/src/ior2020_l22_aero_copter_vision/src/L22_AERO_qrCode.py``` - реализация распознования QR кода \
+```ior_ws/src/ior2020_l22_aero_copter_vision/src/L22_AERO_cam.py``` - нода отпраки изображения в топик /main_camera/image_raw
+
+### ROS launch
+```ior_ws/src/ior2020_l22_aero_copter_vision/launch/L22_AERO_colorDetecting.launch``` - launch файл для запуска L22_AERO_colorDetecting.py \
+```ior_ws/src/ior2020_l22_aero_copter_vision/launch/L22_AERO_qrCode.launch``` -  launch файл для запуска L22_AERO_qrCode.py \
+```ior_ws/src/ior2020_l22_aero_copter_vision/launch/L22_AERO_cam.launch``` -  launch файл для запуска L22_AERO_cam.py \
+```ior_ws/src/ior2020_l22_aero_copter_vision/launch/L22_AERO_colorDetecting_withCam.launch``` = L22_AERO_cam.launch + L22_AERO_colorDetecting.launch \
+```ior_ws/src/ior2020_l22_aero_copter_vision/launch/L22_AERO_qrCode_withCam.launch``` = L22_AERO_cam.launch + L22_AERO_qrCode.launch 
+
 ## Запуск
 ### В виде ROS пакета
  <!-- - Создать catkin workspace 
