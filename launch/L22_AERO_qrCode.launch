@@ -1,5 +1,5 @@
 <launch>
 
-    <node pkg="ior2020_copter_vision" type="L22_AERO_qrCode.py" name="L22_AERO_qrCode" output="screen" clear_params="true"/>
+    <node pkg="ior2020_L22_AERO_copter_vision" type="L22_AERO_qrCode.py" name="L22_AERO_qrCode" output="screen" clear_params="true"/>
     
 </launch>

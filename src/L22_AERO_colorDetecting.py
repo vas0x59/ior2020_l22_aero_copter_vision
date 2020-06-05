@@ -32,9 +32,10 @@ blue_count_pub = rospy.Publisher("/color/blue_count", Int32)
 Параметры цветов
 """
 colors_p_hsv = {
-    "yellow": (np.array([10,  50,  80]), np.array([35,  255, 255])),
-    "red": (np.array([170, 40,  40]), np.array([255, 255, 255])),
-    "blue": (np.array([75,  80,  80]), np.array([130, 255, 255]))
+    "yellow": (np.array([15,  80,  80]), np.array([35,  255, 255])),
+    "red": (np.array([160, 98,  98]), np.array([255, 255, 255])),
+    "red2": (np.array([0, 98,  98]), np.array([10, 255, 255])),
+    "blue": (np.array([90,  80,  80]), np.array([130, 255, 255]))
 }
 colors_p_rgb = {
     "yellow": [0,  200,  200],
@@ -61,13 +62,15 @@ def most_frequent(arr):
 '''
 
 
-def get_color_objs(image, hsv, color_params):
+def get_color_objs(image, hsv, color_params, dop_cp=[]):
     """
     Обработка изображения для определенного цвета
     """
     debug_out = image.copy()
 
     mask = cv2.inRange(hsv, color_params[0], color_params[1])
+    if len(dop_cp) > 0:
+        mask = cv2.bitwise_or(mask,  cv2.inRange(hsv, dop_cp[0], dop_cp[1]))
     # thresh = cv2.threshold(mask, 80, 255, cv2.THRESH_BINARY)[1]
     cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL,
                             cv2.CHAIN_APPROX_SIMPLE)[-2]
@@ -108,7 +111,10 @@ def reg_color(image):
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     results = {}
     for c in ["red", "yellow", "blue"]:
-        results[c] = tuple(get_color_objs(image, hsv, colors_p_hsv[c]))
+        if c == "red":
+            results[c] = tuple(get_color_objs(image, hsv, colors_p_hsv[c], dop_cp=colors_p_hsv[c + "2"]))
+        else:
+            results[c] = tuple(get_color_objs(image, hsv, colors_p_hsv[c]))
 
     # get_color_objs
 
