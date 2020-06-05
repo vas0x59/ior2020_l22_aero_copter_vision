@@ -128,8 +128,8 @@ def reg_color(image):
         res = results[i]
         draw_cnts_colors(debug_main, results[i][3], i, colors_p_rgb[i])
 
-    cv2.putText(debug_main, str("Count BLUE: " + str(results["blue"][2]) + " Area BLUE: " + str(results["blue"][1])), (10, 10),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.5, colors_p_rgb["blue"], 2, cv2.LINE_AA)
+    cv2.putText(debug_main, str("Count BLUE: " + str(results["blue"][2]) + " Area BLUE: " + str(results["blue"][1])), (10, 30),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 0), 2, cv2.LINE_AA)
 
     if IMSHOW_ENB:
         for i in results.keys():

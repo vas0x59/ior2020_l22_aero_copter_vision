@@ -14,7 +14,7 @@ pip3 install pyzbar
  - Cкомпелировать пакет ior2020_L22_AERO_copter_vision  (выполнить ``` catkin_make``` в папке workspace`a )
  - выполнить ``` source devel/setup.bash``` в папке workspace`a  -->
  - выполнить catkin_make в папке ior_ws
- - выполнить source devel/setup.bash
+ - выполнить source devel/setup.bash в папке ior_ws
 #### Для Color Recognition
 ```bash
 roslaunch ior2020_L22_AERO_copter_vision L22_AERO_colorDetecting_withCam.launch
